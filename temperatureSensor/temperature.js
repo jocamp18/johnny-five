@@ -31,12 +31,14 @@ board.on("ready", function() {
    socket.on('maxim',function(max){
      fever = Number(max)
    })
+
+   var interval = setInterval(function(){
+      socket.emit('temp', celsiustemp)
+   }, 4000)
   })
+
   temperature.on("data", function() {
     celsiustemp = Number(this.celsius.toFixed(2));
-   //currentTemperature = document.getElementById("currentTemperature");
-    server.emit('temp', celsiustemp)
-    //currentTemperature.innerHTML(celsiustemp)
     console.log(celsiustemp + " °C");
     board.analogWrite(2, celsiustemp);
     if(celsiustemp > fever){
