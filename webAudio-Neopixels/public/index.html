@@ -34,7 +34,7 @@
       var frequencyData = new Uint8Array(analyser.frequencyBinCount)
 
       function renderFrame () {
-        setTimeout(renderFrame, 80)
+        setTimeout(renderFrame, 500)
         analyser.getByteFrequencyData(frequencyData)
         socket.emit('audio', frequencyData)
       }

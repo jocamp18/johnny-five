@@ -32,12 +32,11 @@
     sendBtn.addEventListener('click',function(evt){
       console.log("press")
       var max = document.getElementById("maxtemp").value
-      socket.emit('maxim',max)},false)
-    socket.on('connection',function(socket1){
-      console.log("data")
-      socket1.on('temp',function(celsius){
-        document.getElementById("currentTemperature").innerHTML="1"+celsius
-      })
+      socket.emit('maxim',max)
+    },false)
+
+    socket.on('temp', function(celsius){
+      console.log(celsius + " °C ")
     })
   </script>
   <script>
