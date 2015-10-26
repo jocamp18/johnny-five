@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Real-time temperature</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script type="text/javascript" src="http://pubnub.github.io/eon/lib/eon.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <!--<script src="/socket.io/socket.io.js"></script>    -->
+  <link rel="stylesheet" type="text/css" href="css/dashboard.css">
+  <link type="text/css" rel="stylesheet" href="http://pubnub.github.io/eon/lib/eon.css" />
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
+<body>
+  <div id="spline"></div>
+  <div class="dataTemp">
+    <label>Set max temperature:</label>
+    <input type="number" id="maxtemp" class="form-control">
+    <input type="submit" class="btn btn-success" id="send" value="Send">
+    <label> Current temperature: </label>
+    <label id="currentTemperature"></label>
+    <label> At </label>
+    <strong>
+      <p id="currentTime"></p>
+    </strong>
+  </div>  
+</body>
+<!-- <script>
+var socket = io.connect()
+var sendBtn = document.querySelector('#send');
+sendBtn.addEventListener('click',function(evt){
+  console.log("press")
+  var max = document.getElementById("maxtemp").value
+  socket.emit('maxim',max)
+},false)
+
+socket.on('temp', function(celsius){
+  console.log(celsius + " °C ")
+})
+</script> -->
+<script>
+eon.chart({
+      channel: "pubnub-eon-iot", // the pubnub channel for real time data
+      generate: {           // c3 chart object
+        bindto: '#spline',
+        data: {
+          x: 'x',
+          labels: false
+        },
+        axis : {
+          x : {
+            type : 'timeseries',
+            tick: {
+              format: '%I:%M:%S %p'
+            }
+          }
+        }
+      },
+      flow: true            // flow configuration
+    });
+</script>
+</html>

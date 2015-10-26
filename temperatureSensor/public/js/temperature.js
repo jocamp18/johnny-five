@@ -1,8 +1,8 @@
-var http = require('http')
+/*var http = require('http')
 var path = require('path')
 var express = require('express')
 var app = express()
-var server = http.createServer(app)
+var server = http.createServer(app)*/
 var io = require('socket.io')(server)
 var five = require("johnny-five")
 var board = new five.Board();
@@ -10,7 +10,7 @@ var fever = 19;
 var celsiustemp;
 var pwmMotor = 2;
 var currentTemperature;
-app.use(express.static(path.join(__dirname, 'public')))
+//app.use(express.static(path.join(__dirname, 'public')))
 var pubnub = require("pubnub")({
     ssl           : true,  // <- enable TLS Tunneling over TCP
     publish_key   : "demo",
@@ -62,5 +62,5 @@ board.on("ready", function() {
     });    
   });
 });
-server.listen(7070)
+//server.listen(7070)
 

@@ -1,8 +1,22 @@
-.dataTemp{
+html{
+	margin: 0px;
+	padding: 0px;
+}
+
+#btnregister{
+	margin-top: 20px;
+}
+
+.loginBox{
 	margin: 150px auto;
 	width: 320px;
 }
 
-#send{
+#btnLogin{
 	margin-top: 20px;
 }
+
+#passLabel{
+	margin-top: 20px;
+}
+
