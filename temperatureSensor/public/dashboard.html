@@ -7,7 +7,7 @@
   <script type="text/javascript" src="http://pubnub.github.io/eon/lib/eon.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  <!--<script src="/socket.io/socket.io.js"></script>    -->
+  <script src="/socket.io/socket.io.js"></script>    
   <link rel="stylesheet" type="text/css" href="css/dashboard.css">
   <link type="text/css" rel="stylesheet" href="http://pubnub.github.io/eon/lib/eon.css" />
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -17,16 +17,14 @@
   <div class="dataTemp">
     <label>Set max temperature:</label>
     <input type="number" id="maxtemp" class="form-control">
-    <input type="submit" class="btn btn-success" id="send" value="Send">
+    <input type="submit" class="btn btn-success" id="send" value="Send"><br>
     <label> Current temperature: </label>
     <label id="currentTemperature"></label>
     <label> At </label>
-    <strong>
-      <p id="currentTime"></p>
-    </strong>
+    <label id="currentTime"></label>
   </div>  
 </body>
-<!-- <script>
+<script>
 var socket = io.connect()
 var sendBtn = document.querySelector('#send');
 sendBtn.addEventListener('click',function(evt){
@@ -35,10 +33,22 @@ sendBtn.addEventListener('click',function(evt){
   socket.emit('maxim',max)
 },false)
 
+function addZero(i) {
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
+}
+
 socket.on('temp', function(celsius){
-  console.log(celsius + " °C ")
+  document.getElementById("currentTemperature").innerHTML = celsius + " °C";
+  var currentTime = new Date();
+  var hour = addZero(currentTime.getHours());
+  var minute = addZero(currentTime.getMinutes());
+  var second = addZero(currentTime.getSeconds());
+  document.getElementById("currentTime").innerHTML = hour + ":" + minute + ":" + second;
 })
-</script> -->
+</script>
 <script>
 eon.chart({
       channel: "pubnub-eon-iot", // the pubnub channel for real time data

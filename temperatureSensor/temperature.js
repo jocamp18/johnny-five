@@ -19,9 +19,8 @@ var pubnub = require("pubnub")({
 
 board.on("ready", function() {
   var coldled = new five.Led(31);
-  var hotled = new five.Led(23);
-  var test = new five.Led(24);
-  //this.pinMode(23, five.Pin.OUTPUT);
+  var hotled = new five.Led(28);
+  this.pinMode(23, five.Pin.OUTPUT);
   var temperature = new five.Temperature({
     controller: "LM35",
     pin: "A0",
@@ -42,12 +41,12 @@ board.on("ready", function() {
     console.log(celsiustemp + " °C");
     
     if(celsiustemp > fever){
-      test.on();
-      //board.digitalWrite(24, 1);
+      board.digitalWrite(23, 1);
       console.log("mas que " + fever);
       coldled.off();
       hotled.on();
     }else{
+      board.digitalWrite(23, 0);
      console.log("menos que " + fever);
       hotled.off();
       coldled.on();
@@ -64,5 +63,5 @@ board.on("ready", function() {
     });    
   });
 });
-server.listen(3000)
+server.listen(7070)
 
